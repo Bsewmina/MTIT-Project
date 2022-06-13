@@ -1,0 +1,6694 @@
+openapi: 3.0.0
+
+info:
+  title: Business API
+  description: API description
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000/api/v1
+    description: local Server
+    #Tempory
+  - url: http://localhost:3000/api
+    description: second Server
+  - url: http://localhost:3000/api/v1/business/
+    description: local Server
+    #Tempory
+  - url: http://example.com/
+    description: original server
+
+components:
+  schemas:
+    BCOrderItems:
+      type: object
+      properties:
+        bizId:
+          type: string
+          example: biz001
+        orderId:
+          type: string
+          example: oreder001
+        itemId:
+          type: string
+          example: 62168136f2cfbcd73640c343
+        qty:
+          type: number
+          example: 50
+        unitPrice:
+          type: number
+          example: 10000
+        status:
+          type: string
+          example: pending
+        createdAt:
+          type: date
+          example: 2022-01-20
+        updatedAt:
+          type: date
+          example: 2022-01-20
+        # id:
+        #   type: string
+        #   example: 62168136f2cfbcd73640c343
+      required:
+        - bizId
+        - orderId
+        - itemId
+        - qty
+        - unitPrice
+        - status
+
+    BizCustomerOrders:
+      type: object
+      properties:
+        bizId:
+          type: string
+          example: biz001
+        orderId:
+          type: string
+          example: oreder001
+        total:
+          type: number
+          example: 60000
+        remainAmount:
+          type: number
+          example: 5000
+        isInstallment:
+          type: boolean
+          example: true
+        notes:
+          type: string
+          example: I have added a added a certified check for Rs.2600. That should cover the cost
+        status:
+          type: string
+          example: Pending
+        deliveryStatus:
+          type: string
+          example: In store
+        createdAt:
+          type: date
+          example: 2022-01-20
+        updatedAt:
+          type: date
+          example: 2022-01-20
+      required:
+        - bizId
+        - orderId
+        - total
+        - remainAmount
+        - isInstallment
+        - notes
+        - status
+        - deliveryStatus
+
+    BizUser:
+      type: object
+      properties:
+        email:
+          type: string
+          example: ABC@gmail.com
+        password:
+          type: string
+          example: password
+        firstName:
+          type: string
+          example: sam
+        lastName:
+          type: string
+          example: smith
+        phone:
+          type: string
+          example: 0113456789
+        userName:
+          type: string
+          example: sam99
+        bizId:
+          type: string
+          example: biz0001
+        bizUserName:
+          type: string
+          example: same@smith
+        dob:
+          type: date
+          example: 1970-01-01
+        status:
+          type: string
+          example: Active
+        bizUserType:
+          type: string
+          example: Owner
+        createdAt:
+          type: date
+          example: 2022-01-20
+        updatedAt:
+          type: date
+          example: 2022-01-20
+      required:
+        - password
+        - firstName
+        - phone
+        - username
+        - bizUserName
+        - bizId
+        - status
+        - bizUserType
+
+    Category:
+      type: object
+      properties:
+        shopId:
+          type: string
+          example: shop123
+        categoryCode:
+          type: string
+          example: VEGI
+        name:
+          type: string
+          example: vegetables
+        description:
+          type: string
+          example: all edible plant including flowers, fruits, stems, leaves, roots, and seeds
+        imageURLs:
+          type: array
+          items:
+            type: string
+          example: https://cdn.britannica.com/17/196817-050-6A15DAC3/vegetables.jpg
+        status:
+          type: string
+          example: Active
+        createdAt:
+          type: date
+          example: 2022-01-20
+        updatedAt:
+          type: date
+          example: 2022-01-20
+        isPublished:
+          type: boolean
+          example: false
+        lastItemId:
+          type: string
+          example: 0000
+      required:
+        - categoryCode
+        - name
+
+    Customer:
+      type: object
+      properties:
+        shopId:
+          type: string
+          example: shop123
+        firstName:
+          type: string
+          example: Sam
+        lastName:
+          type: string
+          example: Smith
+        address:
+          type: string
+          example: 24, New kandy road, Malabe, Western, Sri Lanka
+        phone:
+          type: string
+          example: 01123456789
+        email:
+          type: string
+          example: samsmith@gmail.com
+        status:
+          type: string
+          example: Active
+        createdAt:
+          type: date
+          example: 2022-01-20
+        updatedAt:
+          type: date
+          example: 2022-01-20
+      required:
+        - firstName
+        - phone
+
+    Item:
+      type: object
+      properties:
+        material:
+          type: string
+          example: Fabric
+        name:
+          type: string
+          example: shorts
+        category:
+          type: string
+          example: 61fb90eabd17bbf5da75ab22
+        bizId:
+          type: string
+          example: ihub-default-biz
+        createdAt:
+          type: date
+          example: 2022-01-20
+        updatedAt:
+          type: date
+          example: 2022-01-20
+        barcode:
+          type: string
+          example: 1235323
+        useManuBarCode:
+          type: boolean
+          example: true
+        price:
+          type: number
+          example: 1700
+        description:
+          type: string
+          example: Essential summer style simplified
+        imageURLs:
+          type: array
+          items:
+            type: string
+          example: https://cdn.britannica.com/17/196817-050-6A15DAC3/asdas.jpg
+        tags:
+          type: array
+          items:
+            type: string
+            example: shorts
+        reorderLevel:
+          type: number
+          example: 1
+        hasExpiry:
+          type: boolean
+          example: false
+        commissionRate:
+          type: number
+          example: 0
+        status:
+          type: string
+          example: Active
+      required:
+        - name
+        - category
+        - useManuBarCode
+        - barcode
+
+    NewSale:
+      type: object
+      properties:
+        description:
+          type: string
+          example: Fabric
+        status:
+          type: string
+          example: shorts
+        type:
+          type: string
+          example: 61fb90eabd17bbf5da75ab22
+        customer:
+          type: string
+          example: ihub-default-biz
+        createdAt:
+          type: date
+          example: 2022-01-20
+        updatedAt:
+          type: date
+          example: 2022-01-20
+      required:
+        - description
+        - type
+        - customer
+
+    Supplier:
+      type: object
+      properties:
+        bizId:
+          type: string
+          example: ihub-default-biz
+        firstname:
+          type: string
+          example: jimi
+        lastName:
+          type: string
+          example: kimel
+        address:
+          type: string
+          example: 24/5 kyzer street, colombo 10
+        email:
+          type: string
+          example: jimi@gmail.com
+        phone:
+          type: string
+          example: 0772345678
+        status:
+          type: string
+          example: Active
+        createdAt:
+          type: date
+          example: 2022-01-20
+        updatedAt:
+          type: date
+          example: 2022-01-20
+      required:
+        - firstname
+        - phone
+
+    SupplierOrderData:
+      type: object
+      properties:
+        bizId:
+          type: string
+          example: ihub-default-biz
+        supplierId:
+          type: string
+          example: 61d7dd7385da8caf748751c9
+        totalPrice:
+          type: number
+          example: 20000
+        remainPrice:
+          type: number
+          example: 4000
+        dueDate:
+          type: date
+          example: 2022-01-20
+        status:
+          type: string
+          example: Pending
+        ActiveStatus:
+          type: string
+          example: Active
+        paymentMethod:
+          type: string
+          example: Cash
+        handledBy:
+          type: string
+          example: Mr. sanath
+        notes:
+          type: string
+          example: Buyer hasn't entered any instructions
+        description:
+          type: string
+          example: Please be aware that the payment id RFD23123 can still be reveresed
+      required:
+        - bizId
+        - supplierId
+        - totalPrice
+        - remainPrice
+        - dueDate
+        - status
+        - paymentMethod
+        - handledBy
+        - notes
+
+    SupplierOrderPayment:
+      type: object
+      properties:
+        bizId:
+          type: string
+          example: ihub-default-biz
+        supplierOrderDataId:
+          type: string
+          example: 61d7dd7385da8caf748751c9
+        payment:
+          type: number
+          example: 20000
+        supplierId:
+          type: string
+          example: 61d7dd7385da8caf748751c4
+        method:
+          type: string
+          example: cheque
+        chequeNumber:
+          type: number
+          example: 1234
+        status:
+          type: string
+          example: Active
+      required:
+        - bizId
+        - supplierOrderDataId
+        - payment
+        - supplierId
+        - method
+
+    #-------------------------------  ms-expenses
+    Expenses:
+      type: object
+      properties:
+        shopId:
+          type: string
+          example: ihub-default-biz
+        expenseName:
+          type: string
+          example: New table set
+        expenseDescription:
+          type: string
+          example: Paymnet of itemset B5231
+        createdAt:
+          type: date
+          example: 2022-01-20
+        updatedAt:
+          type: date
+          example: 2022-01-20
+      required:
+        - shopId
+        - expenseName
+
+    #-------------------------------  ms-Global(user)
+
+    User:
+      type: object
+      properties:
+        email:
+          type: string
+          example: ktt@gmail.com
+        phone:
+          type: string
+          example: 01134567897
+        password:
+          type: string
+          example: password
+        isEmailVerified:
+          type: boolean
+          example: false
+        isPhoneVerified:
+          type: boolean
+          example: true
+        userType:
+          type: string
+          example: user
+        dob:
+          type: string
+          example: 2022-01-20
+        gender:
+          type: string
+          example: Male
+        firstName:
+          type: string
+          example: Ktt
+        lastName:
+          type: string
+          example: kimel
+        createdAt:
+          type: date
+          example: 2022-01-20
+        updatedAt:
+          type: date
+          example: 2022-01-20
+      required:
+        - email
+        - phone
+        - password
+        - userType
+        - firstName
+
+    gcOrder:
+      type: object
+      properties:
+        bizId:
+          type: string
+          example: ihub-default-biz
+        orderId:
+          type: string
+          example: 61d841d017ac9ce8099f0e84
+        status:
+          type: string
+          example: Paid
+        price:
+          type: number
+          example: 3000
+        deliveryStatus:
+          type: string
+          example: true
+        GCustomerId:
+          type: string
+          example: 61d841d017ac9ce8099f0e84
+        LCustomerId:
+          type: string
+          example: 61d841d017ac9ce8099f0e84
+        createdAt:
+          type: date
+          example: 2022-01-20
+        updatedAt:
+          type: date
+          example: 2022-01-20
+      required:
+        - bizId
+        - orderId
+        - status
+        - price
+        - deliveryStatus
+        - GCustomerId
+        - LCustomerId
+
+    GCOrderItems:
+      type: object
+      properties:
+        bizId:
+          type: string
+          example: ihub-default-biz
+        gcOrderId:
+          type: string
+          example: 61d841d017ac9ce8099f0e84
+        itemId:
+          type: string
+          example: 61d841d017ac9ce8099f0e84
+        qty:
+          type: number
+          example: 30
+        unitPrice:
+          type: number
+          example: 3000
+        status:
+          type: string
+          example: inStock
+        createdAt:
+          type: date
+          example: 2022-01-20
+        updatedAt:
+          type: date
+          example: 2022-01-20
+      required:
+        - bizId
+        - gcOrderId
+        - itemId
+        - qty
+        - unitPrice
+        - status
+
+    Gcustomer:
+      type: object
+      properties:
+        bizId:
+          type: string
+          example: ihub-default-biz
+        firstName:
+          type: string
+          example: william
+        lastName:
+          type: string
+          example: astasd
+        address:
+          type: string
+          example: 412/B york street, waligama south
+        phone:
+          type: string
+          example: 0112345678
+        email:
+          type: string
+          example: william@gmail.com
+        createdAt:
+          type: date
+          example: 2022-01-20
+        updatedAt:
+          type: date
+          example: 2022-01-20
+      required:
+        - bizId
+        - firstName
+        - phone
+
+    GlobalCategory:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Books
+        description:
+          type: string
+          example: books about marketing, growth hacking, and business
+        defaultImageUrl:
+          type: string
+          example: http://image2.html
+        createdAt:
+          type: date
+          example: 2022-01-20
+        updatedAt:
+          type: date
+          example: 2022-01-20
+      required:
+        - name
+        - defaultImageUrl
+        - phone
+
+    gCatImage:
+      type: object
+      properties:
+        categoryId:
+          type: string
+          example: 61d841d017ac9ce8099f0e84
+        url:
+          type: string
+          example: http://image2.html
+        createdAt:
+          type: date
+          example: 2022-01-20
+        updatedAt:
+          type: date
+          example: 2022-01-20
+      required:
+        - categoryId
+        - url
+
+    GlobalItem:
+      type: object
+      properties:
+        name:
+          type: string
+          example: RC Car
+        categoryId:
+          type: string
+          example: 61d841d017ac9ce8099f0e84
+        barcode:
+          type: date
+          example: 00213535
+        useManuBarCode:
+          type: boolean
+          example: false
+        description:
+          type: string
+          example: RC Cars With 550 powerful motor, more stronger and durable,perfect for specialized operation
+        hasExpiry:
+          type: boolean
+          example: true
+        defaultImageUrl:
+          type: string
+          example: http://image2.html
+        createdAt:
+          type: date
+          example: 2022-01-20
+        updatedAt:
+          type: date
+          example: 2022-01-20
+      required:
+        - name
+        - categoryId
+        - barcode
+        - useManuBarCode
+        - hasExpiry
+        - defaultImageUrl
+
+    gItemImage:
+      type: object
+      properties:
+        itemId:
+          type: string
+          example: RC Car
+        url:
+          type: string
+          example: http://image2.html
+        createdAt:
+          type: date
+          example: 2022-01-20
+        updatedAt:
+          type: date
+          example: 2022-01-20
+      required:
+        - itemId
+        - url
+
+    GlobleItemtag:
+      type: object
+      properties:
+        itemId:
+          type: string
+          example: 61d841d017ac9ce8099f0e84
+        tagName:
+          type: string
+          example: car
+        createdAt:
+          type: date
+          example: 2022-01-20
+        updatedAt:
+          type: date
+          example: 2022-01-20
+      required:
+        - itemId
+        - tagName
+
+    GSubCatagory:
+      type: object
+      properties:
+        name:
+          type: string
+          example: PC
+        description:
+          type: string
+          example: Personal computers
+        createdAt:
+          type: date
+          example: 2022-01-20
+        updatedAt:
+          type: date
+          example: 2022-01-20
+      required:
+        - itemId
+        - tagName
+
+    Globletag:
+      type: object
+      properties:
+        tagName:
+          type: string
+          example: PC
+        createdAt:
+          type: date
+          example: 2022-01-20
+        updatedAt:
+          type: date
+          example: 2022-01-20
+      required:
+        - tagName
+
+    GMainCatagory:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Storage Devices
+        description:
+          type: string
+          example: All availbe storage device types such as hard disk, ssds, extenal storages
+        createdAt:
+          type: date
+          example: 2022-01-20
+        updatedAt:
+          type: date
+          example: 2022-01-20
+      required:
+        - name
+
+#-------------------------------  ms-Price-History
+    ItemPrHisRetail:
+      type: object
+      properties:
+        itemId:
+          type: string
+          example: 61d841d017ac9ce8099f0e84
+        date:
+          type: date
+          example: 2022-01-01
+        price:
+          type: number
+          example: 60000
+      required:
+        - itemId
+        - date
+        - price
+
+    ItemPrHisWhsale:
+      type: object
+      properties:
+        itemId:
+          type: string
+          example: 61d841d017ac9ce8099f0e84
+        date:
+          type: date
+          example: 2022-01-01
+        price:
+          type: number
+          example: 50000
+      required:
+        - itemId
+        - date
+        - price
+
+    PriceBusiness:  
+      type: object
+      properties:
+        businessName:
+          type: string
+          example: Ruhunu products
+        location:
+          type: string
+          example: Galanigama
+      required:
+        - businessName
+        - location
+
+#-------------------------------  ms-Sales 
+
+#-------------------------------  ms-Shops 
+
+    Shops:  
+      type: object
+      properties:
+        bizId:
+          type: string
+          example: ihub-default-biz
+        shopName:
+          type: string
+          example: DSI
+        shopAddress:
+          type: string
+          example: Nawala peresa, new fork street, colombo
+        phone1:
+          type: string
+          example: 0113456789
+        phone2:
+          type: string
+          example: 0113456789
+        email:
+          type: string
+          example: dsi.products@gmail.com
+        createdAt:
+          type: date
+          example: 2022-01-20
+        updatedAt:
+          type: date
+          example: 2022-01-20
+      required:
+        - shopName
+
+#-------------------------------  ms-Stocks 
+
+    StockData:  
+      type: object
+      properties:
+        bizId:
+          type: string
+          example: ihub-default-biz
+        stockInType:
+          type: string
+          example: Direct purchase
+        userId:
+          type: string
+          example: 61d841d017ac9ce8099f0e84
+        stockStorageType:
+          type: string
+          example: Vehicle
+        stockStorageId:
+          type: string
+          example: 61d841d017ac9ce8099f0e84
+        status:
+          type: string
+          example: completed
+        referenceId:
+          type: string
+          example: 61d841d017ac9ce8099f0e84
+        createdAt:
+          type: date
+          example: 2022-01-20
+        updatedAt:
+          type: date
+          example: 2022-01-20
+      required:
+        - bizId
+        - stockInType
+        - userId
+        - stockStorageType
+        - stockStorageId
+        - status
+        - referenceId
+
+    StockItem:  
+      type: object
+      properties:
+        stockDataId:
+          type: string
+          example: 61d841d017ac9ce8099f0e84
+        userId:
+          type: string
+          example: 61d841d017ac9ce8099f0e84
+        bizId:
+          type: string
+          example: ihub-default-biz
+        itemId:
+          type: string
+          example: 61d841d017ac9ce8099f0e84
+        amount:
+          type: number
+          example: 75
+        unitPrice:
+          type: number
+          example: 4000
+        status:
+          type: string
+          example: Canceled
+        remainAmount:
+          type: number
+          example: 15
+      required:
+        - stockDataId
+        - userId
+        - bizId
+        - itemId
+        - amount
+        - unitPrice
+        - status
+        - remainAmount
+
+    StockItemCount:  
+      type: object
+      properties:
+        itemId:
+          type: string
+          example: 61d841d017ac9ce8099f0e84
+        name:
+          type: string
+          example: 61d841d017ac9ce8099f0e84
+        count:
+          type: string
+          example: ihub-default-biz
+        currentPrice:
+          type: string
+          example: 61d841d017ac9ce8099f0e84
+        bizId:
+          type: number
+          example: 75
+        stockId:
+          type: number
+          example: 4000
+        tockType:
+          type: string
+          example: Canceled
+      required:
+        - stockDataId
+        - userId
+        - bizId
+        - itemId
+        - amount
+        - unitPrice
+        - status
+        - remainAmount
+
+  requestBodies:
+    BCOrderItemsBody:
+      description: A JSON object containing Order Items information
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/BCOrderItems"
+
+    BizCustomerOrderBody:
+      description: A JSON object containing Customer's Order information
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/BizCustomerOrders"
+
+    BizUserBody:
+      description: A JSON object containing business user information
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/BizUser"
+
+    CategoryBody:
+      description: A JSON object containing Category information
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Category"
+
+    CustomerBody:
+      description: A JSON object containing Customer information
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Customer"
+
+    ItemBody:
+      description: A JSON object containing Items information
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Item"
+
+    NewSaleBody:
+      description: A JSON object containing NewSales information
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/NewSale"
+
+    SupplierBody:
+      description: A JSON object containing Supplier information
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Supplier"
+
+    SupplierOrderDataBody:
+      description: A JSON object containing SupplierOrderData
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SupplierOrderData"
+
+    SupplierOrderPaymentBody:
+      description: A JSON object containing SupplierOrderPayment info
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SupplierOrderPayment"
+
+    #-------------------------------  ms-expenses
+    ExpensesBody:
+      description: A JSON object containing information of Expenses
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Expenses"
+
+    #-------------------------------  ms-Global(user)
+
+    UserBody:
+      description: A JSON object containing information of Global user
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/User"
+
+    gcOrderBody:
+      description: A JSON object containing information of Global Customer orders
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/gcOrder"
+
+    GCOrderItemsBody:
+      description: A JSON object containing information of Global Customer order Items
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GCOrderItems"
+
+    GcustomerBody:
+      description: A JSON object containing information of Global Customer
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Gcustomer"
+
+    GlobalCategoryBody:
+      description: A JSON object containing information of Global Category info
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GlobalCategory"
+
+    gCatImageBody:
+      description: A JSON object containing information of Global Category Image
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/gCatImage"
+
+    GlobalItemBody:
+      description: A JSON object containing information of Global Item Images
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GlobalItem"
+    
+    gItemImageBody:
+      description: A JSON object containing information of Global Item images
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/gItemImage"
+
+    GlobleItemtagBody:
+      description: A JSON object containing information of Global Item Tag
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GlobleItemtag"
+
+    GSubCatagoryBody:
+      description: A JSON object containing information of Global sub categoryies
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GSubCatagory"
+
+    GlobletagBody:
+      description: A JSON object containing information of Global Tags
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Globletag"
+
+    GMainCatagoryBody:
+      description: A JSON object containing information of Global Main Category
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GMainCatagory"
+
+#-------------------------------  ms-Price-History
+
+    ItemPrHisRetailBody:
+      description: A JSON object containing information of Retail Item Price History
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ItemPrHisRetail"
+
+    ItemPrHisWhsaleBody:
+      description: A JSON object containing information of Whalesale Item Price History
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ItemPrHisWhsale"
+
+    PriceBusinessBody:
+      description: A JSON object containing information of Price Business
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PriceBusiness"
+
+#-------------------------------  ms-Sales 
+
+#-------------------------------  ms-Shops 
+
+    ShopsBody:
+      description: A JSON object containing information of Shops
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Shops"
+
+#-------------------------------  ms-Stocks
+
+    StockDataBody:
+      description: A JSON object containing information of Stock Data
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/StockData"
+
+    StockItemBody:
+      description: A JSON object containing information of Stock Items
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/StockItem"
+
+    StockItemCountBody:
+      description: A JSON object containing information of Stock Item Count data
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/StockItemCount"
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  security:
+    - bearerAuth: []
+
+paths:
+  /business/customer-order-items:
+    get:
+      deprecated: true
+      summary: Returns a list of all Customer order items.
+      tags:
+        - customer-order-items
+      description: All availble Customer order items in the database. use only for the development
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BCOrderItems"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+    post:
+      tags:
+        - customer-order-items
+      summary: Create Customer order items
+      description: Create order items of a customer with the item details
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/BCOrderItemsBody"
+      responses:
+        201:
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BCOrderItems"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  /business/customer-order-items/order/{orderId}:
+    get:
+      tags:
+        - customer-order-items
+      summary: Get a list of Customer order item by order id.
+      description: Returns the infomation of a Customer order item by the orderId
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: orderId
+          schema:
+            type: string
+          required: true
+          description: orderId of the Customer order item
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BCOrderItems"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /business/customer-order-items/{id}:
+    get:
+      tags:
+        - customer-order-items
+      summary: Get Customer order item by id.
+      description: Returns the infomation of a Customer order item
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID of the Customer order item
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BCOrderItems"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+    put:
+      tags:
+        - customer-order-items
+      summary: Update Customer order item
+      description: Update an existing Customer order item by passing the id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/BCOrderItemsBody"
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID of the order item to be updated
+      responses:
+        201:
+          description: Successfully Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BCOrderItems"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+    delete:
+      tags:
+        - customer-order-items
+      summary: Delete Customer order item
+      description: Delete an existing Customer order item by passing the id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID of the order item to be Deleted
+      responses:
+        200:
+          description: Successfully Deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BCOrderItems"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  #-------------------------------  BizCustomerOrders  -------------------------------
+
+  /business/biz-customer-order:
+    get:
+      tags:
+        - customer-order
+      deprecated: true
+      summary: Get All customer orders
+      description: All availble Customer orders in the database. use only for the development
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BizCustomerOrders"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+    post:
+      tags:
+        - customer-order
+      summary: Create Customer order
+      description: Create an order of a customer with order details
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/BizCustomerOrderBody"
+      responses:
+        201:
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BizCustomerOrders"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  /business/biz-customer-order/{id}:
+    put:
+      tags:
+        - customer-order
+      summary: Update Customer order
+      description: Update an existing order by passing the id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/BizCustomerOrderBody"
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID of the order to be updated
+      responses:
+        201:
+          description: Successfully Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BizCustomerOrders"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+    delete:
+      tags:
+        - customer-order
+      summary: Delete an order
+      description: Delete an existing Customer order by passing the id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID of the order to be Deleted
+      responses:
+        200:
+          description: Successfully Deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BizCustomerOrders"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+    get:
+      tags:
+        - customer-order
+      summary: Get order by id
+      description: returns the details of a order by passing the id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID of the order
+      responses:
+        201:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BizCustomerOrders"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  /business/biz-customer-order/biz/{bizId}:
+    get:
+      tags:
+        - customer-order
+      summary: Get order by bizId
+      description: returns the details of a order by passing the bizId as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: bizId
+          schema:
+            type: string
+          required: true
+          description: bizId of the customer
+      responses:
+        201:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BizCustomerOrders"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  #-------------------------------  BizUser(addUser)  -------------------------------
+
+  /business/biz-user-add:
+    get:
+      deprecated: true
+      summary: Returns a list of all business users
+      tags:
+        - BizUser(addUser)
+      description: All availble business users in the database. use only for the development
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BizUser"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+    post:
+      tags:
+        - BizUser(addUser)
+      summary: Create a business user
+      description: Create a business user with user details
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/BizUserBody"
+      responses:
+        201:
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BizUser"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  /business/biz-user-add/exportdata:
+    get:
+      tags:
+        - BizUser(addUser)
+      summary: Download BizUser data as csv
+      description: Download all availble business user data as a single csv file
+      produces:
+        - application/csv
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/csv:
+              schema:
+                type: string
+                format: binary
+                # $ref: '#/components/schemas/BizUser'
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /business/biz-user-add/shop/{shopId}:
+    get:
+      tags:
+        - BizUser(addUser)
+      summary: Get bizUser info by shopId
+      description: Returns information of a business by passing the shopId as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: shopId
+          schema:
+            type: string
+          required: true
+          description: shopId that need to be filtered out
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BizUser"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /business/biz-user-add/{id}:
+    get:
+      tags:
+        - BizUser(addUser)
+      summary: Get bizUser info by id
+      description: Returns information of a business by passing the id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: id of the business user
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BizUser"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+    put:
+      tags:
+        - BizUser(addUser)
+      summary: Update BizUser
+      description: Update an existing business user details by passing the id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: id of the business user
+      requestBody:
+        $ref: "#/components/requestBodies/BizUserBody"
+      responses:
+        201:
+          description: Successfully Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BizUser"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+    delete:
+      tags:
+        - BizUser(addUser)
+      summary: Delete BizUser
+      description: Delete an existing business user by passing the id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: id of the business user
+      responses:
+        200:
+          description: Successfully Deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BizUser"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /business/biz-user-add/delete-with-status/{id}:
+    delete:
+      tags:
+        - BizUser(addUser)
+      summary: Update status as deleted
+      description: delete method to update status as deleted by passing the id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: id of the business user
+      responses:
+        200:
+          description: Status Updated as Deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BizUser"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  #-------------------------------  Category  -------------------------------
+
+  /business/Category:
+    get:
+      deprecated: true
+      summary: Returns a list of all Category
+      tags:
+        - Category
+      description: Returns All availble Categorys in the database. use only for the development
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+    post:
+      tags:
+        - Category
+      summary: Create a Category
+      description: Create a Category with Category details
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/CategoryBody"
+      responses:
+        201:
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  /business/Category/exportdata:
+    get:
+      tags:
+        - Category
+      summary: Download Category data as csv
+      description: Download all availble Category data as a single csv file
+      produces:
+        - application/csv
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/csv:
+              schema:
+                type: string
+                format: binary
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /business/Category/exportdata/{shopId}:
+    get:
+      tags:
+        - Category
+      summary: Download Category data by shopId
+      description: Download all availble Category data as a single csv file filtered by the shopId
+      produces:
+        - application/csv
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: shopId
+          schema:
+            type: string
+          required: true
+          description: shopId of the Category
+      responses:
+        200:
+          description: OK
+          content:
+            application/csv:
+              schema:
+                type: string
+                format: binary
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /business/Category/shop:
+    get:
+      tags:
+        - Category
+      summary: Get Categories by shopId
+      description: Get Category data by the shopId of the current user
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /business/Category/shop/{shopId}:
+    get:
+      tags:
+        - Category
+      summary: Search Categories by a shopId
+      description: Get Category data of a business by passing the shopId as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: shopId
+          schema:
+            type: string
+          required: true
+          description: shopId to apply the filter
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /business/Category/name/{name}:
+    get:
+      tags:
+        - Category
+      summary: Check Categories by Category name
+      description: Check Category by passing the category name whether it's available or not in current user
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: name
+          schema:
+            type: string
+          required: true
+          description: Name of the Category which needs to be checked
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Category available
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /business/Category/category-code-check/{categoryCode}:
+    get:
+      tags:
+        - Category
+      summary: Check Categories by categoryCode
+      description: Check Category by passing the categoryCode whether it's available or not in current user
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: categoryCode
+          schema:
+            type: string
+          required: true
+          description: categoryCode which needs to be checked
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Category available
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /business/Category/get-last-item-id/{catId}:
+    get:
+      tags:
+        - Category
+      summary: Get last item of a Category
+      description: Get the last item of a Category by passing the CategoryId as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: catId
+          schema:
+            type: string
+          required: true
+          description: Category Id which needs to be checked
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                example: item0210
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /business/Category/{id}:
+    get:
+      tags:
+        - Category
+      summary: Search Categories by Id
+      description: Get Category data by passing the Category id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Id of the Category
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+    put:
+      tags:
+        - Category
+      summary: Update Category
+      description: Update an existing Category data by passing the Category id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Id of the Category
+      requestBody:
+        $ref: "#/components/requestBodies/CategoryBody"
+      responses:
+        201:
+          description: Successfully Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+    delete:
+      tags:
+        - Category
+      summary: Delete Category
+      description: Delete an existing Category by passing the Category id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Category Id
+      responses:
+        201:
+          description: Successfully Deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /business/Category/delete-with-status/{id}:
+    delete:
+      tags:
+        - Category
+      summary: Update status as deleted
+      description: delete method to update status as deleted by passing the id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: id of the Category
+      responses:
+        200:
+          description: Status Updated as Deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  #-------------------------------  Customer  -------------------------------
+
+  /business/Customer:
+    get:
+      deprecated: true
+      summary: Returns a list of all Customers
+      tags:
+        - Customer
+      description: Returns All availble Customers in the database. use only for the development
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Customer"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+    post:
+      tags:
+        - Customer
+      summary: Create a Customer
+      description: Create a Customer with details
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/CustomerBody"
+      responses:
+        201:
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Customer"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  /business/Customer/check-phone:
+    get:
+      summary: Check phone number
+      tags:
+        - Customer
+      description: Check whether the phone number is available or not with the business
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Available
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /business/Customer/shop:
+    get:
+      summary: take all customers by shopID
+      tags:
+        - Customer
+      description: Get all customers of the current(business) of a user
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Customer"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /business/Customer/exportdata:
+    get:
+      tags:
+        - Customer
+      summary: Download Customer data
+      description: Download all availble Customer data as a single csv file
+      produces:
+        - application/csv
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/csv:
+              schema:
+                $ref: "#/components/schemas/Customer"
+                # type: string
+                # format: binary
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /business/Customer/exportdata/{shopId}:
+    get:
+      tags:
+        - Customer
+      summary: Download Customer data by shopId
+      description: Download all availble Customer data as a single csv file filtered by the shopId
+      produces:
+        - application/csv
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: shopId
+          schema:
+            type: string
+          required: true
+          description: shopId of the Customer
+      responses:
+        200:
+          description: OK
+          content:
+            application/csv:
+              schema:
+                type: string
+                format: binary
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+    # /Customer/{id}:
+    #   get:
+    #     tags:
+    #       - Customer
+    #     summary: Get Customer by id
+    #     description: Get specific Customer details by passing the id as parameter
+    #     produces:
+    #       - application/json
+    #     security:
+    #       - bearerAuth: []
+    #     parameters:
+    #       - in: path
+    #         name: id
+    #         schema:
+    #           type: string
+    #         required: true
+    #         description: Id of the Customer
+    #     responses:
+    #       200:
+    #         description: OK
+    #         content:
+    #           application/json:
+    #             schema:
+    #               $ref: '#/components/schemas/Customer'
+    #       400:
+    #         description: User Error
+    #       404:
+    #         description: Not found error
+
+    put:
+      tags:
+        - Customer
+      summary: Update Customer
+      description: Update an existing Customer by passing the id as parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Id of the Customer
+      requestBody:
+        $ref: "#/components/requestBodies/CustomerBody"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Customer"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+    delete:
+      tags:
+        - Customer
+      summary: Delete Customer
+      description: Delete an existing Customer by passing the id as parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Id of the Customer
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Customer"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /business/Customer/delete-with-status/{id}:
+    delete:
+      tags:
+        - Customer
+      summary: Update status as deleted
+      description: delete method to update status as deleted by passing the id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: id of the Category
+      responses:
+        200:
+          description: OK Status Updated as Deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  #-------------------------------  Item -------------------------------
+
+  /business/Item:
+    get:
+      deprecated: true
+      summary: Returns a list of all Items
+      tags:
+        - Items
+      description: Returns All availble Items in the database. use only for the development
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Item"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+    post:
+      tags:
+        - Items
+      summary: Create an Item
+      description: Create an Item with details
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/ItemBody"
+      responses:
+        201:
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Item"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  /business/Item/exportdata:
+    get:
+      tags:
+        - Items
+      summary: Download Item data
+      description: Download all availble Item data as a single csv file
+      produces:
+        - application/csv
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/csv:
+              schema:
+                type: string
+                format: binary
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /business/Item/exportdata/{shopId}:
+    get:
+      tags:
+        - Items
+      summary: Download Item data by shopId
+      description: Download all availble Item data as a single csv file by the shopId
+      produces:
+        - application/csv
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: shopId
+          schema:
+            type: string
+          required: true
+          description: id of the Bussiness or shop
+      responses:
+        200:
+          description: OK
+          content:
+            application/csv:
+              schema:
+                type: string
+                format: binary
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /business/Item/shop:
+    get:
+      summary: take all Items of current shopId
+      tags:
+        - Items
+      description: Get all Items of the current(business) of a user
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Item"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /business/Item/shop/{shopId}:
+    get:
+      summary: take all Items of a shop
+      tags:
+        - Items
+      description: Get all Items of a shop by passing the shopId as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: shopId
+          schema:
+            type: string
+          required: true
+          description: id of the Bussiness or shop
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Item"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /business/Item/{id}:
+    get:
+      summary: Get an Item details
+      tags:
+        - Items
+      description: Get details of an existing Item by passing the Itemid as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: id of Item to be search
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Item"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+    put:
+      summary: Update Item
+      tags:
+        - Items
+      description: Update an existing Item by passing the Itemid as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: id of Item need to be updated
+      requestBody:
+        $ref: "#/components/requestBodies/ItemBody"
+      responses:
+        201:
+          description: Updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Item"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+    delete:
+      summary: Delete an Item
+      tags:
+        - Items
+      description: Delete an existing Item by passing the Itemid as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: id of Item to be deleted
+      requestBody:
+        $ref: "#/components/requestBodies/ItemBody"
+      responses:
+        201:
+          description: Deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Item"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /business/Item/delete-with-status/{id}:
+    delete:
+      tags:
+        - Items
+      summary: Update status as deleted
+      description: delete method to update status as deleted by passing the id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: id of the Item
+      responses:
+        200:
+          description: OK Status Updated as Deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Item"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  #-------------------------------  New Sales  -------------------------------
+
+  /business/new-sale:
+    post:
+      tags:
+        - New sales
+      summary: Create a new sale
+      description: Create a new sale with details
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/NewSaleBody"
+      responses:
+        201:
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NewSale"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  #-------------------------------  Signin  -------------------------------
+
+  /business/biz-user-signin:
+    post:
+      tags:
+        - Signin
+      summary: biz user signin
+      description: signin using correct user credentials
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: sam
+                password:
+                  type: string
+                  example: password
+                bizUserName:
+                  type: string
+                  example: Ruhunu
+              required:
+                - username
+                - password
+                - bizUserName
+      responses:
+        201:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  #-------------------------------  Supplier  -------------------------------
+
+  /business/suppliers:
+    get:
+      deprecated: true
+      summary: Returns a list of all Suppliers
+      tags:
+        - Supplier
+      description: Returns All availble Suppliers in the database. use only for the development
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Supplier"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+    post:
+      tags:
+        - Supplier
+      summary: Create an Supplier
+      description: Create an Supplier with details
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/SupplierBody"
+      responses:
+        201:
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Supplier"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  /business/suppliers/exportdata:
+    get:
+      tags:
+        - Supplier
+      summary: Download Supplier data
+      description: Download all availble Supplier data as a single csv file
+      produces:
+        - application/csv
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/csv:
+              schema:
+                type: string
+                format: binary
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /business/suppliers/exportdata/{id}:
+    get:
+      tags:
+        - Supplier
+      summary: Download Supplier data by bizId
+      description: Download all availble Supplier data for a given business id
+      produces:
+        - application/csv
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Supplier's business id
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/csv:
+              schema:
+                type: string
+                format: binary
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /business/suppliers/biz:
+    get:
+      summary: Returns a list of all Suppliers of the current user
+      tags:
+        - Supplier
+      description: Returns All availble Suppliers for the current user (business)
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Supplier"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /business/suppliers/{id}:
+    get:
+      summary: Get Supplier
+      tags:
+        - Supplier
+      description: Returns a Supplier by passing the supplier id as a parameter
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Supplier id
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Supplier"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+    put:
+      summary: Update Supplier
+      tags:
+        - Supplier
+      description: Update an existing Supplier by passing the SupplierID as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: id of Supplier to be updated
+      requestBody:
+        $ref: "#/components/requestBodies/SupplierBody"
+      responses:
+        201:
+          description: Updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Supplier"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+    delete:
+      summary: Delete Supplier
+      tags:
+        - Supplier
+      description: Delete an existing Supplier by passing the SupplierID as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: id of Supplier to be deleted
+      requestBody:
+        $ref: "#/components/requestBodies/SupplierBody"
+      responses:
+        201:
+          description: Deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Supplier"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /business/Suppliers/delete-with-status/{id}:
+    delete:
+      tags:
+        - Supplier
+      summary: Update status as deleted
+      description: delete method to update status as deleted by passing the id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: id of the Supplier
+      responses:
+        200:
+          description: OK Status Updated as Deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Supplier"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  #-------------------------------  Supplier-Order-Data -------------------------------
+
+  /business/supplier-order-data:
+    get:
+      deprecated: true
+      summary: Returns a list of all supplier-order-data
+      tags:
+        - supplier-order-data
+      description: Returns All availble supplier-order-data in the database. use only for the development
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupplierOrderData"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+    post:
+      tags:
+        - supplier-order-data
+      summary: Create supplier order
+      description: Create data of an supplier's order
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/SupplierOrderDataBody"
+      responses:
+        201:
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupplierOrderData"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  /business/supplier-order-data/exportdata:
+    get:
+      tags:
+        - supplier-order-data
+      summary: Download all Supplier order data
+      description: Download all availble Supplier order data
+      produces:
+        - application/csv
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/csv:
+              schema:
+                type: string
+                format: binary
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /business/supplier-order-data/exportdata/{id}:
+    get:
+      tags:
+        - supplier-order-data
+      summary: Download supplier order data by bizId
+      description: Download all availble supplier order data for a given business id
+      produces:
+        - application/csv
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: business id
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/csv:
+              schema:
+                type: string
+                format: binary
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /business/supplier-order-data/{id}:
+    get:
+      summary: Get supplier order data by supplier id
+      tags:
+        - supplier-order-data
+      description: Returns a supplier order data by passing the supplier id as a parameter
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: id of the suppliera
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupplierOrderData"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+    put:
+      summary: Update supplier order data
+      tags:
+        - supplier-order-data
+      description: Update an existing supplier order data by passing the id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: id of the supplier order data to be updated
+      requestBody:
+        $ref: "#/components/requestBodies/SupplierOrderDataBody"
+      responses:
+        201:
+          description: Updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupplierOrderData"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+    delete:
+      summary: Delete supplier order data
+      tags:
+        - supplier-order-data
+      description: Delete an existing supplier order data by passing the ID as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: id of the supplier order data to be deleted
+      responses:
+        201:
+          description: Deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupplierOrderData"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /business/supplier-order-data/delete-with-status/{id}:
+    delete:
+      tags:
+        - supplier-order-data
+      summary: Update status as deleted
+      description: delete method to update status as deleted by passing the id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: id of the supplier order data
+      responses:
+        200:
+          description: OK Status Updated as Deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupplierOrderData"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  #-------------------------------  Supplier-Order-Payment  -------------------------------
+
+  /business/supplier-order-payments:
+    get:
+      deprecated: true
+      summary: Returns a list of all SupplierOrderPayment
+      tags:
+        - supplier-order-payment
+      description: Returns All availble SupplierOrderPayment in the database. use only for the development
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupplierOrderPayment"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+    post:
+      tags:
+        - supplier-order-payment
+      summary: Create Supplier Order Payment
+      description: Create Order Payment for a supplier's order
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/SupplierOrderPaymentBody"
+      responses:
+        201:
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupplierOrderPayment"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  /business/supplier-order-payments/exportdata:
+    get:
+      tags:
+        - supplier-order-payment
+      summary: Download Supplier Order Payment data
+      description: Download all availble Supplier Order Payment data in the database as a csv file
+      produces:
+        - application/csv
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/csv:
+              schema:
+                type: string
+                format: binary
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /business/supplier-order-payments/exportdata/{id}:
+    get:
+      tags:
+        - supplier-order-payment
+      summary: Download Supplier Order Payment data by bizId
+      description: Download all availble Supplier Order Payment data for a given business id
+      produces:
+        - application/csv
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: business id
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/csv:
+              schema:
+                type: string
+                format: binary
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /business/supplier-order-payments/supplierOrderData/{supOrdDataid}:
+    get:
+      tags:
+        - supplier-order-payment
+      summary: Get supplier order payments by supplier Order Data id
+      description: Get all available supplier order payments by supplier Order Data id
+      produces:
+        - application/csv
+      parameters:
+        - in: path
+          name: supOrdDataid
+          schema:
+            type: string
+          required: true
+          description: supplier Order Data id
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/csv:
+              schema:
+                $ref: "#/components/schemas/SupplierOrderPayment"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /business/supplier-order-payments/{id}:
+    # get:
+    #   tags:
+    #     - supplier-order-payment
+    #   summary: Get supplier order payment by id
+    #   description: Get supplier order payments data by passing the id as a parameter
+    #   produces:
+    #     - application/csv
+    #   parameters:
+    #     - in: path
+    #       name: id
+    #       schema:
+    #         type: string
+    #       required: true
+    #       description: supplier Order Payment id
+    #   security:
+    #     - bearerAuth: []
+    #   responses:
+    #     200:
+    #       description: OK
+    #       content:
+    #         application/csv:
+    #           schema:
+    #             $ref: '#/components/schemas/SupplierOrderPayment'
+    #     400:
+    #       description: User Error
+    #     404:
+    #       description: Not found error
+
+    put:
+      summary: Update supplier Order Payment
+      tags:
+        - supplier-order-payment
+      description: Update an existing supplier Order Payment by passing the id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: id of the supplier Order Payment to be updated
+      requestBody:
+        $ref: "#/components/requestBodies/SupplierOrderPaymentBody"
+      responses:
+        201:
+          description: Updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupplierOrderPayment"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+    delete:
+      summary: Delete supplier Order Payment
+      tags:
+        - supplier-order-payment
+      description: Delete an existing supplier Order Payment by passing the ID as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: id of the supplier Order Payment to be deleted
+      responses:
+        201:
+          description: Deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupplierOrderPayment"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /business/supplier-order-payments/delete-with-status/{id}:
+    delete:
+      tags:
+        - supplier-order-payment
+      summary: Update status as deleted
+      description: delete method to update status as deleted by passing the id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: id of the supplier order payment
+      responses:
+        200:
+          description: OK Status Updated as Deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupplierOrderPayment"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  #-------------------------------  ms-expenses -------------------------------
+
+  #-------------------------------  expenses -------------------------------
+
+  /expenses:
+    get:
+      deprecated: true
+      summary: Returns a list of all expenses
+      tags:
+        - Expenses
+      description: Returns All availble expenses in the database. use only for the development
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Expenses"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+    post:
+      tags:
+        - Expenses
+      summary: Create expenses
+      description: Create New expense for a shop
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/ExpensesBody"
+      responses:
+        201:
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Expenses"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  /expenses/{Id}:
+    get:
+      summary: Get expenses by ID
+      tags:
+        - Expenses
+      description: Returns a selected expense in the database by passing the id as a parameter
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: Id
+          schema:
+            type: string
+          required: true
+          description: id of the expense
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Expenses"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /expenses/shop/{shopId}:
+    get:
+      summary: Get expenses by shopId
+      tags:
+        - Expenses
+      description: Returns All availble expenses in the database by shopId
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: shopId
+          schema:
+            type: string
+          required: true
+          description: shopId
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Expenses"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /expenses/check/{shopId}:
+    get:
+      summary: Check expense name
+      tags:
+        - Expenses
+      description: Check avaibility of the expense by passing the shopId
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: shopId
+          schema:
+            type: string
+          required: true
+          description: shopId
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                expenseName:
+                  type: string
+                  example: New set of tables
+              required:
+                - expenseName
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Expenses"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /expenses/update/{id}:
+    put:
+      summary: Update expense
+      tags:
+        - Expenses
+      description: Update existing expense by passing the id
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: id of the expense
+      requestBody:
+        $ref: "#/components/requestBodies/ExpensesBody"
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Expenses"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /expenses/delete/{id}:
+    put:
+      summary: Delete expense
+      tags:
+        - Expenses
+      description: Delete an existing expense by passing the id
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: id of the expense
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                expenseName:
+                  type: string
+                  example: New set of tables
+              required:
+                - expenseName
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Expenses"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  #-------------------------------  ms-Global -------------------------------
+
+  #-------------------------------  users -------------------------------
+
+  /users/currentuser:
+    get:
+      summary: Get current user
+      tags:
+        - User
+      description: Returns Current user
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /user/currentuser/{email}:
+    get:
+      summary: Get Current user by email
+      tags:
+        - User
+      description: Returns details of the current user by passing the email as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: email
+          schema:
+            type: string
+          required: true
+          description: Email
+      responses:
+        200:
+          description: OK
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /auth/is-email-verified/{email}:
+    get:
+      summary: Check current user email
+      tags:
+        - User
+      description: Check whether current user's email is verified or not
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: email
+          schema:
+            type: string
+          required: true
+          description: Email
+      responses:
+        200:
+          description: OK
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /user/auth/is-phone-verified/{email}:
+    get:
+      summary: Check current user's Phone
+      tags:
+        - User
+      description: Check whether current user's phone is verified or not
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: email
+          schema:
+            type: string
+          required: true
+          description: Email
+      responses:
+        200:
+          description: OK
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /auth/empty-attributes/{email}:
+    get:
+      summary: check empty feild
+      tags:
+        - User
+      description: Check empty feilds (dob, gender,lastname)
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: email
+          schema:
+            type: string
+          required: true
+          description: Email
+      responses:
+        200:
+          description: OK
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /auth/update/{email}:
+    put:
+      tags:
+        - User
+      summary: Update user details
+      description: Update existing user details
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/UserBody"
+      responses:
+        201:
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  /current/user/update/verification/{email}:
+    put:
+      tags:
+        - User
+      summary: update email phone verification
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/UserBody"
+      responses:
+        201:
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  /current/user/delete/{email}:
+    delete:
+      tags:
+        - User
+      summary: Delete user
+      description: Update existing user details
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: Successfully Deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  #-------------------------------  Global Customer Order -------------------------------
+
+  /global/customer/order:
+    get:
+      deprecated: true
+      summary: Returns a list of all Global Customer Orders
+      tags:
+        - Global Customer Order
+      description: Returns All availble supplier-order-data in the database. use only for the development
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/gcOrder"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+    post:
+      tags:
+        -  Global Customer Order
+      summary: Create  Global Customer Order
+      description: Create data of a  Global Customer Order
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/gcOrderBody"
+      responses:
+        201:
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/gcOrder"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  /global/customer/customer/:
+    get:
+      summary: Get orders by GCustomerId and LCustomerId
+      tags:
+        - Global Customer Order
+      description: Returns All availble order information by sending GCustomerId and LCustomerId
+      produces:
+        - application/json
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                GCustomerId:
+                  type: string
+                  example: 61d841d017ac9ce8099f0e84
+                  LCustomerId:
+                  type: string
+                  example: 61d841d017ac9ce8099f0e84
+              required:
+                - GCustomerId
+                - LCustomerId
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/gcOrder"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /global/customer/order/{id}:
+    put:
+      tags:
+        -  Global Customer Order
+      summary: Update Global Customer Order
+      description: Udpate existing Global Customer Order
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: gcOrder id
+      requestBody:
+        $ref: "#/components/requestBodies/gcOrderBody"
+      responses:
+        201:
+          description: Successfully Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/gcOrder"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+    delete:
+      tags:
+        -  Global Customer Order
+      summary: Delete Global Customer Order
+      description: Delete an existing Global Customer Order
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: gcOrder id
+      responses:
+        200:
+          description: Successfully Deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/gcOrder"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+#-------------------------------  Global Customer Order Items -------------------------------
+  /global/order/items:
+    get:
+      deprecated: true
+      summary: Returns a list of all Global Customer Orders Order Items
+      tags:
+        - Global Customer Order Items
+      description: Returns All availble Global Customer Orders Order Items data in the database. use only for the development
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GCOrderItems"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /global/order/items/new:
+    post:
+      tags:
+        -  Global Customer Order Items
+      summary: Create  Global Customer Order Items
+      description: Create new Global Customer Order Items
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/GCOrderItemsBody"
+      responses:
+        201:
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GCOrderItems"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  /global/order/items/check:
+    get:
+      summary: Check item availability
+      tags:
+        - Global Customer Order Items
+      produces:
+        - application/json
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                bizId:
+                  type: string
+                gcOrderId:
+                  type: string
+                itemId:
+                  type: string
+              required:
+                - bizId
+                - gcOrderId
+                - itemId
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /global/order/items/check/{gcOrderId}:
+    get:
+      summary: Get order by order id
+      tags:
+        - Global Customer Order Items
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: gcOrderId
+          schema:
+            type: string
+          required: true
+          description: order id
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GCOrderItems"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /global/order/items/update:
+    put:
+      tags:
+        -  Global Customer Order Items
+      summary: Update  Global Customer Order Items
+      description: Update existing Global Customer Order Items
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/GCOrderItemsBody"
+      responses:
+        201:
+          description: Successfully Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GCOrderItems"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  /global/order/items/delete:
+    delete:
+      tags:
+        -  Global Customer Order Items
+      summary: Delete  Global Customer Order Items
+      description: Delete existing Global Customer Order Items
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/GCOrderItemsBody"
+      responses:
+        200:
+          description: Successfully Deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GCOrderItems"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+#-------------------------------  Global Customer -------------------------------
+
+  /global/customer:
+    get:
+      deprecated: true
+      summary: Returns a list of all Global Customers 
+      tags:
+        - Global Customer
+      description: Returns All availble Global Customers in the database. use only for the development
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Gcustomer"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+    post:
+      tags:
+        -  Global Customer
+      summary: Create  Global Customer 
+      description: Create new Global Customer
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/GcustomerBody"
+      responses:
+        201:
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Gcustomer"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  /global/customer/business:
+    get:
+      summary: Get customer by bizId and phone number
+      tags:
+        - Global Customer
+      description: get customer by bizId and phone number by sending bizId and phone as body parameters
+      produces:
+        - application/json
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                bizId:
+                  type: string
+                  example: ihub-default-user
+                phone:
+                  type: string
+                  example: 0113456789
+              required:
+                - bizId
+                - phone
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Gcustomer"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /global/customer/business/{bizId}:
+    get:
+      summary: Get customer by bizId
+      tags:
+        - Global Customer
+      description: Get customer by sending bizId as a parameters
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: bizId
+          schema:
+            type: string
+          required: true
+          description: business id
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Gcustomer"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /global/customer/{id}:
+    put:
+      tags:
+        -  Global Customer
+      summary: Update  Global Customer 
+      description: Update new Global Customer
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Global customer id
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/GcustomerBody"
+      responses:
+        201:
+          description: Successfully Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Gcustomer"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+    delete:
+      tags:
+        -  Global Customer
+      summary: Delete  Global Customer 
+      description: Delete existing Global Customer
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Global customer id
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: Successfully Deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Gcustomer"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+#-------------------------------  Global category -------------------------------
+
+  /global/catrgory:
+    get:
+      deprecated: true
+      summary: Returns a list of all Global categories 
+      tags:
+        - Global category
+      description: Returns All availble Global categories in the database. use only for the development
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GlobalCategory"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /global/catrgory/new:
+    post:
+      tags:
+        -  Global category
+      summary: Create  Global category 
+      description: Create new Global category
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/GlobalCategoryBody"
+      responses:
+        201:
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GlobalCategory"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  /global/catrgory/check:
+    get:
+      summary: Check category name
+      tags:
+        - Global category
+      description: Check availability of the category name in the database by sending the name as a body parameter
+      produces:
+        - application/json
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Mens wear
+              required:
+                - name
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /global/catrgory/{id}:
+    get:
+      summary: Get catefory by id
+      tags:
+        - Global category
+      description: Get category information by passing the id as a parameter
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Category id
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GlobalCategory"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /global/catrgory/update:
+    put:
+      tags:
+        -  Global category
+      summary: Update  Global category
+      description: Update existing Global category name
+      produces:
+        - application/json
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Mens wear
+              required:
+                - name
+      security:
+        - bearerAuth: []
+      responses:
+        201:
+          description: Successfully Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GlobalCategory"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  /global/catrgory/delete:
+    delete:
+      tags:
+        -  Global category
+      summary: Delete Global category
+      description: Delete existing Global category
+      produces:
+        - application/json
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Mens wear
+              required:
+                - name
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: Successfully Deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GlobalCategory"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+#-------------------------------  Global category images -------------------------------
+
+  /global/category/Image:
+    get:
+      deprecated: true
+      summary: Get all images
+      tags:
+        - Global category images
+      description: Returns All availble item images in the database. use only for the development
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/gCatImage"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /global/category/Image/new:
+    post:
+      tags:
+        -  Global category images
+      summary: Create category image 
+      description: Create new Global category image
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/gCatImageBody"
+      responses:
+        201:
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/gCatImage"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  /global/category/Image/check:
+    get:
+      summary: check item image
+      tags:
+        - Global category images
+      description: Check item image availability 
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                categoryId:
+                  type: string
+                  example: 61d841d017ac9ce8099f0e84
+                url:
+                  type: string
+                  example: http://image2.html
+              required:
+                - categoryId
+                - url
+      responses:
+        200:
+          description: OK
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /global/category/Image/check/{categoryId}:
+    get:
+      summary: Get image by categoryId
+      tags:
+        - Global category images
+      description: Get existing image by passing category id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: categoryId
+          schema:
+            type: string
+          required: true
+          description: Category id
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/gCatImage"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /global/category/Image/update:
+    put:
+      tags:
+        -  Global category images
+      summary: Update category image
+      description: Update an existing Global category image
+      produces:
+        - application/json
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                categoryId:
+                  type: string
+                  example: 61d841d017ac9ce8099f0e84
+                url:
+                  type: string
+                  example: http://image2.html
+                newurl:
+                  type: string
+                  example: http://image2.html
+              required:
+                - categoryId
+                - url
+                - newurl
+      security:
+        - bearerAuth: []
+      responses:
+        201:
+          description: Successfully Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/gCatImage"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  /global/category/Image/delete:
+    delete:
+      tags:
+        -  Global category images
+      summary: Delete category images
+      description: Delete an existing Global category images
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                categoryId:
+                  type: string
+                  example: 61d841d017ac9ce8099f0e84
+                url:
+                  type: string
+                  example: http://image2.html
+              required:
+                - categoryId
+                - url
+      responses:
+        200:
+          description: Successfully Deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/gCatImage"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+#-------------------------------  Global Items -------------------------------
+
+
+  /global/Item:
+    get:
+      deprecated: true
+      summary: Get all Items
+      tags:
+        - Global Items
+      description: Returns All availble Global Items
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GlobalItem"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /global/Item/new:
+    post:
+      tags:
+        -  Global Items
+      summary: Create Item 
+      description: Create new Global Item
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/GlobalItemBody"
+      responses:
+        201:
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GlobalItem"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  /global/Item/check:
+    get:
+      summary: Check item name
+      tags:
+        - Global Items
+      description: Check item name available in a category
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Rc Car
+                categoryId:
+                  type: string
+                  example: 61d841d017ac9ce8099f0e84
+              required:
+                - name
+                - categoryId
+      responses:
+        200:
+          description: OK
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /global/Item/check/{categoryId}:
+    get:
+      summary: Get Item by category
+      tags:
+        - Global Items
+      description: Returns an Item info by passing categoryId as parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: categoryId
+          schema:
+            type: string
+          required: true
+          description: Category ID
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GlobalItem"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /global/Item/update:
+    put:
+      tags:
+        -  Global Items
+      summary: Update Item
+      description: Update an existing Global Item
+      produces:
+        - application/json
+      requestBody:
+        $ref: "#/components/requestBodies/GlobalItemBody"
+      security:
+        - bearerAuth: []
+      responses:
+        201:
+          description: Successfully Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GlobalItem"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  /global/Item/delete:
+    delete:
+      tags:
+        -  Global Items
+      summary: Delete Item
+      description: Delete an existing Global Item
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Rc Car
+                categoryId:
+                  type: string
+                  example: 61d841d017ac9ce8099f0e84
+              required:
+                - name
+                - categoryId
+      responses:
+        200:
+          description: Successfully Deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GlobalItem"
+        400:
+          description: Error
+        404:
+          description: Not found error
+        
+#-------------------------------  Global Item Images -------------------------------
+  
+  /global/Item/Image:
+    get:
+      deprecated: true
+      summary: Get all Item Images
+      tags:
+        - Global Item Images
+      description: Returns All availble Global Item Images
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/gItemImage"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /global/Item/Image/new:
+    post:
+      tags:
+        -  Global Item Images
+      summary: Create Item Image
+      description: Create new Global Item Image
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/gItemImageBody"
+      responses:
+        201:
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/gItemImage"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  /global/Item/Image/check:
+    get:
+      summary: Check item image
+      tags:
+        - Global Item Images
+      description: Check availability of the global item image
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/gItemImageBody"
+      responses:
+        200:
+          description: OK
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /global/Item/Image/check/{itemId}:
+    get:
+      summary: Get item image by id
+      tags:
+        - Global Item Images
+      description: Get an Global item image by passing item id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: itemId
+          schema:
+            type: string
+          required: true
+          description: Item id
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/gItemImage"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /global/Item/Image/update:
+    put:
+      tags:
+        -  Global Item Images
+      summary: Update Item image
+      description: Update an existing Global Item Image
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                itemId:
+                  type: string
+                  example: Rc Car
+                url:
+                  type: string
+                  example: http://image2.html
+                newurl:
+                  type: string
+                  example: http://image5.html
+              required:
+                - itemId
+                - url
+                - newurl
+      responses:
+        201:
+          description: Successfully Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/gItemImage"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  /global/Item/Image/delete:
+    delete:
+      tags:
+        -  Global Item Images
+      summary: Delete Item Image
+      description: Delete an existing Global Item Image
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/gItemImageBody"
+      responses:
+        200:
+          description: Successfully Deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/gItemImage"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+
+#-------------------------------  Global Item Tag -------------------------------
+
+  /global/item/tag:
+    get:
+      deprecated: true
+      summary: Get all Item Tags
+      tags:
+        - Global Item Tag
+      description: Returns All availble Global Item Tags
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GlobleItemtag"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /global/item/tag/new:
+    post:
+      tags:
+        -  Global Item Tag
+      summary: Create Item Tag
+      description: Create new Global Item Tag
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/GlobleItemtagBody"
+      responses:
+        201:
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GlobleItemtag"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  /global/item/tag/check:
+    get:
+      summary: Check tag name
+      tags:
+        - Global Item Tag
+      description: Check tag name available in item
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/GlobleItemtagBody"
+      responses:
+        200:
+          description: OK
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /global/item/tag/check{itemId}:
+    get:
+      summary: Check tag by itemId
+      tags:
+        - Global Item Tag
+      description: Check tag name by passing itemid as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: itemId
+          schema:
+            type: string
+          required: true
+          description: Item Id
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GlobleItemtag"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /global/item/tag/check/items:
+    get:
+      summary: Get item by tag
+      tags:
+        - Global Item Tag
+      description: Get items by sending the tag name
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tagName:
+                  type: string
+                  example: car
+              required:
+                - tagName
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GlobleItemtag"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /global/item/tag/update:
+    put:
+      tags:
+        -  Global Item Tag
+      summary: Update Item Tag
+      description: Update an existing Global Item Tag
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/GlobleItemtagBody"
+      responses:
+        201:
+          description: Successfully Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GlobleItemtag"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  /global/item/tag/delete:
+    delete:
+      tags:
+        -  Global Item Tag
+      summary: Delete Item Tag
+      description: Delete an existing Global Item Tag
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/GlobleItemtagBody"
+      responses:
+        200:
+          description: Successfully Deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GlobleItemtag"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+
+#-------------------------------  Global Sub Category -------------------------------
+
+  /global/sub/catrgory:
+    get:
+      deprecated: true
+      summary: Get all Sub Categories
+      tags:
+        - Global Sub Category
+      description: Returns All availble Global Sub Categories
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GSubCatagory"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /global/sub/catrgory/new:
+    post:
+      tags:
+        -  Global Sub Category
+      summary: Create Sub Category
+      description: Create new Global Sub Category
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/GSubCatagoryBody"
+      responses:
+        201:
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GSubCatagory"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  /global/sub/catrgory/check:
+    get:
+      summary: Check sub category name
+      tags:
+        - Global Sub Category
+      description: Check global sub category name by passing the name
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: PC
+              required:
+                - name
+      responses:
+        200:
+          description: OK
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /global/sub/catrgory/{id}:
+    get:
+      summary: Get sub category by id
+      tags:
+        - Global Sub Category
+      description: Get sub category by passing the id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: sub category id
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GSubCatagory"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /global/sub/catrgory/update:
+    put:
+      tags:
+        -  Global Sub Category
+      summary: Update Sub Category
+      description: Update an existing Global Sub Category
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/GSubCatagoryBody"
+      responses:
+        201:
+          description: Successfully Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GSubCatagory"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  /global/sub/catrgory/delete:
+    delete:
+      tags:
+        -  Global Sub Category
+      summary: Delete Sub Category
+      description: Delete an existing Global Sub Category
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: PC
+              required:
+                - name
+      responses:
+        200:
+          description: Successfully Deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GSubCatagory"
+        400:
+          description: Error
+        404:
+          description: Not found error
+          
+#-------------------------------  Global Tags -------------------------------
+
+  /global/tags: 
+    get:
+      deprecated: true
+      summary: Get all Tags
+      tags:
+        - Global Tags
+      description: Returns All availble Global Tags
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Globletag"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /global/tags/new:
+    post:
+      tags:
+        -  Global Tags
+      summary: Create Tag
+      description: Create new Global Tags
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/GlobletagBody"
+      responses:
+        201:
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Globletag"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  /global/tags/check:
+    get:
+      summary: Check tag name
+      tags:
+        - Global Tags
+      description: Check Global Tags name by passing the tagName
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/GlobletagBody"
+      responses:
+        200:
+          description: OK
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /global/tags/check/{id}:
+    get:
+      summary: Get tag by id
+      tags:
+        - Global Tags
+      description: Get global tag by passing the id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Global tag id
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Globletag"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /global/tags/update:
+    put:
+      tags:
+        -  Global Tags
+      summary: Update Sub Category
+      description: Update an existing Global Tags
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tagName:
+                  type: string
+                  example: PC
+                newName:
+                  type: string
+                  example: Laptop
+              required:
+                - tagName
+      responses:
+        201:
+          description: Successfully Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Globletag"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  /global/tags/delete:
+    delete:
+      tags:
+        -  Global Tags
+      summary: Delete tag
+      description: Delete an existing Global Tags
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/GlobletagBody"
+      responses:
+        200:
+          description: Successfully Deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Globletag"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+#-------------------------------  Global Main Category -------------------------------
+
+  /global/main/catrgory: 
+    get:
+      deprecated: true
+      summary: Get all categories
+      tags:
+        - Global Main Category
+      description: Returns All availble Global Main categories
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GMainCatagory"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /global/main/catrgory/new:
+    post:
+      tags:
+        -  Global Main Category
+      summary: Create Category
+      description: Create new Global Main Category
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/GMainCatagoryBody"
+      responses:
+        201:
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GMainCatagory"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  /global/main/catrgory/check:
+    get:
+      summary: Check tag name
+      tags:
+        - Global Main Category
+      description: Check Global Main Category name by passing the category name
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/GMainCatagoryBody"
+      responses:
+        200:
+          description: OK
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /global/main/catrgory/{id}:
+    get:
+      summary: Get category by id
+      tags:
+        - Global Main Category
+      description: Get global tag by passing the id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Global category id
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GMainCatagory"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /global/main/catrgory/update:
+    put:
+      tags:
+        -  Global Main Category
+      summary: Update Sub Category
+      description: Update an existing Global Main Category
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tagName:
+                  type: string
+                  example: Storage
+                newName:
+                  type: string
+                  example: Audio
+              required:
+                - tagName 
+      responses:
+        201:
+          description: Successfully Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GMainCatagory"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  /global/main/catrgory/delete:
+    delete:
+      tags:
+        -  Global Main Category
+      summary: Delete Category
+      description: Delete an existing Global Main Category
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/GMainCatagoryBody"
+      responses:
+        200:
+          description: Successfully Deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GMainCatagory"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+
+#-------------------------------  ms-Price-History -------------------------------
+
+#-------------------------------  Item Price History Retail -------------------------------
+
+  /item-pricehistory-retail:
+    get:
+      tags:
+        - Item Price History Retail
+      deprecated: true
+      summary: Get All Retail price histories
+      description: All availble Item price history details in the database. use only for the development
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ItemPrHisRetail"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+    post:
+      tags:
+        - Item Price History Retail
+      summary: Create retail price history
+      description: Create new retail item price history
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/ItemPrHisRetailBody"
+      responses:
+        201:
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ItemPrHisRetail"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  /item-pricehistory-retail/{id}:
+    get:
+      tags:
+        - Item Price History Retail
+      summary: Get Retail price history by id
+      description: Get an availble retail price history by passing the id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Object id
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ItemPrHisRetail"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+    put:
+      tags:
+        - Item Price History Retail
+      summary: Update Retail price history
+      description: Update an existing Retail price history by passing the id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/ItemPrHisRetailBody"
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID of the Retail price history object
+      responses:
+        201:
+          description: Successfully Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ItemPrHisRetail"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+    delete:
+      tags:
+        - Item Price History Retail
+      summary: Delete Retail price history
+      description: Delete an existingRetail price history by passing the id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID of the Retail price history to be Deleted
+      responses:
+        200:
+          description: Successfully Deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ItemPrHisRetail"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+
+
+#-------------------------------  Item Price History Whale Sale -------------------------------
+
+  /item-pricehistory-Wholesale:
+    get:
+      tags:
+        - Item Price History Whale-Sale
+      deprecated: true
+      summary: Get All Whale-Sale price histories
+      description: All availble Whale-Sale Item price history details in the database. use only for the development
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ItemPrHisWhsale"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+    post:
+      tags:
+        - Item Price History Whale-Sale
+      summary: Create Whale-Sale price history
+      description: Create new Whale-Sale item price history
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/ItemPrHisWhsaleBody"
+      responses:
+        201:
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ItemPrHisWhsale"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  /item-pricehistory-Wholesale/{id}:
+    get:
+      tags:
+        - Item Price History Whale-Sale
+      summary: Get Whale-Sale price history by id
+      description: Get an availble Whale-Sale price history by passing the id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Object id
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ItemPrHisWhsale"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+    put:
+      tags:
+        - Item Price History Whale-Sale
+      summary: Update Whale-Sale price history
+      description: Update an existing Whale-Sale price history by passing the id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/ItemPrHisWhsaleBody"
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID of the Whale-Sale price history object
+      responses:
+        201:
+          description: Successfully Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ItemPrHisWhsale"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+    delete:
+      tags:
+        - Item Price History Whale-Sale
+      summary: Delete Whale-Sale price history
+      description: Delete an existing Whale-Sale price history by passing the id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID of the Whale-Sale price history to be Deleted
+      responses:
+        200:
+          description: Successfully Deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ItemPrHisWhsale"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+#-------------------------------  Price Business -------------------------------
+
+
+  /price-business:
+    get:
+      tags:
+        - Price Business
+      deprecated: true
+      summary: Get All Price Business
+      description: All availblePrice Business data in the database. use only for the development
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PriceBusiness"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+    post:
+      tags:
+        - Price Business
+      summary: Create Price Business
+      description: Create new Price Business with business name and location
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/PriceBusinessBody"
+      responses:
+        201:
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PriceBusiness"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  /price-business/{id}:
+    get:
+      tags:
+        - Price Business
+      summary: Get Price Business by id
+      description: Get an existing Price Business by passing the id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Object id
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PriceBusiness"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+    put:
+      tags:
+        - Price Business
+      summary: Update Price Business
+      description: Update an existing Price Business by passing the id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/PriceBusinessBody"
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID of the Price Business object
+      responses:
+        201:
+          description: Successfully Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PriceBusiness"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+    delete:
+      tags:
+        - Price Business
+      summary: Delete Price Business 
+      description: Delete an existing Price Business by passing the id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID of the Price Business to be Deleted
+      responses:
+        200:
+          description: Successfully Deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PriceBusiness"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+
+#-------------------------------  ms-Sales -------------------------------
+#-------------------------------  ms-Shops -------------------------------
+
+  /shops:
+    post:
+      tags:
+        - Shops
+      summary: Create Shops
+      description: Create new Shop with details
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/ShopsBody"
+      responses:
+        201:
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Shops"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  /shops/all:
+    get:
+      tags:
+        - Shops
+      summary: Get All Shops
+      description: All availble Shops data in the database
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Shops"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /shops/id/{id}:
+    get:
+      tags:
+        - Shops
+      summary: Get Shops by id
+      description: Get an existing Shops by passing the id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: id of the object
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Shops"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /shops/all/name:
+    get:
+      tags:
+        - Shops
+      summary: Get shop by name
+      description: Get availble Shops data in the database by name
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/ShopsBody"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Shops"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /shops/update/{id}:
+    put:
+      tags:
+        - Shops
+      summary: Update Shops
+      description: Update an existing Shops by passing the id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/ShopsBody"
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID of the Shops object
+      responses:
+        201:
+          description: Successfully Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Shops"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  /shops/delete/{id}:  
+    delete:
+      tags:
+        - Shops
+      summary: Delete Shops 
+      description: Delete an existing Shops by passing the id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID of the Shop to be Deleted
+      responses:
+        200:
+          description: Successfully Deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Shops"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+
+#-------------------------------  ms-Stocks -------------------------------
+
+
+#-------------------------------  Stock Data -------------------------------
+ 
+  /stocks/stock-data:
+    post:
+      tags:
+        - Stock Data
+      summary: Create Stock Data
+      description: Create new Stock Data with details
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/StockDataBody"
+      responses:
+        201:
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StockData"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  /stocks/stock-data/{id}:
+    get:
+      tags:
+        - Stock Data
+      summary: Get Stock Data by id
+      description: Get an existing Stock Data by passing the id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Id of the Stock Data
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StockData"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+    put:
+      tags:
+        - Stock Data
+      summary: Update Stock Data
+      description: Update an existing Stock Data by passing the id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/StockDataBody"
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID of the Stock Data object
+      responses:
+        201:
+          description: Successfully Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StockData"
+        400:
+          description: Error
+        404:
+          description: Not found error
+ 
+    delete:
+      tags:
+        - Stock Data
+      summary: Delete Stock Data 
+      description: Delete an existing Stock Data by passing the Stock Data id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID of the Stock Data to be Deleted
+      responses:
+        200:
+          description: Successfully Deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StockData"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+
+#-------------------------------  Stock Item -------------------------------
+
+
+  /stocks/stock-items:
+    post:
+      tags:
+        - Stock Item
+      summary: Create Stock Item
+      description: Create new Stock Item with details
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/StockItemBody"
+      responses:
+        201:
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StockItem"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  /stocks/stock-items/stockDataId/{id}:
+    get:
+      tags:
+        - Stock Item
+      summary: Get Stock Item by Stock data
+      description: Get an existing Stock Item by passing the stockdataid as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Id of the StockData
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StockItem"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /stocks/stock-items/bizId/{id}:
+    get:
+      tags:
+        - Stock Item
+      summary: Get Stock Item by bizId
+      description: Get an existing Stock Item by passing the bizId as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: BizId
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StockItem"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /stocks/stock-items/{id}:
+    put:
+      tags:
+        - Stock Item
+      summary: Update Stock Item
+      description: Update an existing Stock Item by passing the id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/StockItemBody"
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID of the Stock Item object
+      responses:
+        201:
+          description: Successfully Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StockItem"
+        400:
+          description: Error
+        404:
+          description: Not found error
+ 
+    delete:
+      tags:
+        - Stock Item
+      summary: Delete Stock Item 
+      description: Delete an existing Stock Item by passing the Stock Item id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID of the Stock Item to be Deleted
+      responses:
+        200:
+          description: Successfully Deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StockItem"
+        400:
+          description: Error
+        404:
+          description: Not found error
+          
+#-------------------------------  Stock Item Count -------------------------------
+
+  /stocks/stockItemCount:
+    post:
+      tags:
+        - Stock Item Count
+      summary: Create Stock Item Count
+      description: Create new Stock Item Count with details
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/StockItemCountBody"
+      responses:
+        201:
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StockItemCount"
+        400:
+          description: Error
+        404:
+          description: Not found error
+
+  /stocks/stockItemCount/bizId:
+    get:
+      tags:
+        - Stock Item Count
+      summary: Get Stock Item Count data by bizID
+      description: Get an existing Stock Item Counts data by bussiness id
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StockItemCount"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /stocks/stockItemCount/stockId/{id}:
+    get:
+      tags:
+        - Stock Item Count
+      summary: Get Stock Item Count data by stockId
+      description: Get an existing Stock Item Count data by passing the stockId as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: stockId
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StockItemCount"
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /stocks/stockItemCount/stock-item-count-by-id/{id}:
+    get:
+      tags:
+        - Stock Item Count
+      summary: Get Stock Item Count by itemId
+      description: Get an existing Stock Item Count as a count by passing the itemId as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: itemId
+      responses:
+        200:
+          description: OK
+        400:
+          description: User Error
+        404:
+          description: Not found error
+
+  /stocks/stockItemCount/{id}:
+    put:
+      tags:
+        - Stock Item Count
+      summary: Update Stock Item Count data
+      description: Update an existing Stock Item Count data by passing the id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/StockItemCountBody"
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID of the Stock Item Count object
+      responses:
+        201:
+          description: Successfully Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StockItemCount"
+        400:
+          description: Error
+        404:
+          description: Not found error
+ 
+    delete:
+      tags:
+        - Stock Item Count
+      summary: Delete Stock Item Count 
+      description: Delete an existing Stock Item Count object by passing the Stock Item Count id as a parameter
+      produces:
+        - application/json
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID of the Stock Item Count object to be Deleted
+      responses:
+        200:
+          description: Successfully Deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StockItemCount"
+        400:
+          description: Error
+        404:
+          description: Not found error
