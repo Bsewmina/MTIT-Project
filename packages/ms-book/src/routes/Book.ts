@@ -11,11 +11,11 @@ router.get('/', async (req: Request, res: Response) => {
 router.post(
   '/',
   [
-    body('book_name').not().isEmpty().withMessage('Please enter a category name.'),
-    body('book_author').not().isEmpty().withMessage('please enter a category Code'),
-    body('pub_year').not().isEmpty().withMessage('Please enter a category name.'),
-    body('book_price').not().isEmpty().withMessage('please enter a category Code'),
-    body('book_isbn').not().isEmpty().withMessage('please enter a category Code'),
+    body('book_name').not().isEmpty().withMessage('Please enter a book name'),
+    body('book_author').not().isEmpty().withMessage('please enter book author'),
+    body('pub_year').not().isEmpty().withMessage('Please enter pulished year'),
+    body('book_price').not().isEmpty().withMessage('please enter book price'),
+    body('book_isbn').not().isEmpty().withMessage('please enter ISBN number'),
   ],
   async (req: Request, res: Response) => {
     // const validate = validationResult(req);
@@ -79,11 +79,11 @@ router.delete('/:isbn', async (req: Request, res: Response) => {
 router.put(
   '/:isbn',
   [
-    body('book_name').not().isEmpty().withMessage('Please enter a category name.'),
-    body('book_author').not().isEmpty().withMessage('please enter a category Code'),
-    body('pub_year').not().isEmpty().withMessage('Please enter a category name.'),
-    body('book_price').not().isEmpty().withMessage('please enter a category Code'),
-    body('book_isbn').not().isEmpty().withMessage('please enter a category Code'),
+    body('book_name').not().isEmpty().withMessage('Please enter a book name'),
+    body('book_author').not().isEmpty().withMessage('please enter book author'),
+    body('pub_year').not().isEmpty().withMessage('Please enter pulished year'),
+    body('book_price').not().isEmpty().withMessage('please enter book price'),
+    body('book_isbn').not().isEmpty().withMessage('please enter ISBN number'),
   ],
 
   async (req: Request, res: Response) => {
