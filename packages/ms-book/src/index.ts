@@ -7,7 +7,7 @@ const start = async () => {
   //     throw new Error('JWT_KEY must be defined');
   // }
   try {
-    await mongoose.connect('mongodb+srv://MTIT:MTIT@realmcluster.pt3rz.mongodb.net/Bussiness');
+    await mongoose.connect('mongodb+srv://MTIT:MTIT@realmcluster.pt3rz.mongodb.net/Book');
     console.log('Connected to MongoDB');
   } catch (err) {
     console.log(err);
